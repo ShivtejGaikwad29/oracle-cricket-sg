@@ -95,8 +95,8 @@ if st.button('🔮 Predict Probability'):
     })
 
     result = pipe.predict_proba(input_df)
-    loss_prob = result[0][0] * 100
+    win1_prob = result[0][0] * 100
     win_prob = result[0][1] * 100
 
     st.success(f"🏆 **{batting_team} Winning Probability:** {win_prob:.2f}%")
-    st.error(f"🎯 **{balling_team} Losing Probability:** {loss_prob:.2f}%")
+    st.error(f"🎯 **{balling_team} Winning Probability:** {win1_prob:.2f}%")
