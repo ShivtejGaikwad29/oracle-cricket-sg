@@ -33,27 +33,25 @@ col1, col2 = st.columns(2)
 with col1:
     batting_team = st.selectbox('🏏 Select the Batting Team', ['Select Team'] + sorted(teams_data.keys()))
 with col2:
-    balling_team = st.selectbox('🎯 Select the Bowling Team', ['Select Team'] + sorted(teams_data.keys()))
+    bowling_team = st.selectbox('🎯 Select the Bowling Team', ['Select Team'] + sorted(teams_data.keys()))
+
+# Validation Check: Prevent Selecting the Same Team
+if batting_team != 'Select Team' and bowling_team != 'Select Team' and batting_team == bowling_team:
+    st.error("⚠️ Batting and Bowling teams cannot be the same! Please select different teams.")
+    st.stop()  # Stop execution if teams are the same
 
 # Default background color (light gray)
 default_color = "#D3D3D3"
 
 # Set color dynamically only if a team is selected
 batting_color = teams_data.get(batting_team, {}).get('color', default_color)
-bowling_color = teams_data.get(balling_team, {}).get('color', default_color)
+bowling_color = teams_data.get(bowling_team, {}).get('color', default_color)
 
 # Set Background Color Effect
 st.markdown(f"""
     <style>
         .stApp {{
             background: linear-gradient(to right, #4A90E2, #50E3C2);
-            # background: linear-gradient(to right, #FF7E5F, #FEB47B);
-            # background: linear-gradient(to right, #8A2BE2, #4B0082);
-            # background: linear-gradient(to right, #0F2027, #00C9FF);
-
-
-
-            transition: background 0.5s ease;
         }}
     </style>
 """, unsafe_allow_html=True)
@@ -84,7 +82,7 @@ if st.button('🔮 Predict Probability'):
 
     input_df = pd.DataFrame({
         'batting_team': [batting_team],
-        'bowling_team': [balling_team],
+        'bowling_team': [bowling_team],
         'city': [selected_city],
         'runs_left': [runs_left],
         'balls_left': [balls_left],
@@ -99,4 +97,4 @@ if st.button('🔮 Predict Probability'):
     win_prob = result[0][1] * 100
 
     st.success(f"🏆 **{batting_team} Winning Probability:** {win_prob:.2f}%")
-    st.error(f"🎯 **{balling_team} Winning Probability:** {win1_prob:.2f}%")
+    st.error(f"🎯 **{bowling_team} Winning Probability:** {win1_prob:.2f}%")
