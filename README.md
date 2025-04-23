@@ -2,8 +2,8 @@
 
 **Oracle Cricket SG** is a Machine Learning-based Python application that predicts the winning probability of IPL (Indian Premier League) matches. It uses historical match data and statistical modeling to forecast outcomes based on match conditions.
 
-![Prediction Output](images/Predicting%20the%20scores.png)
 ![UI Overview](images/Ui%20predictor.png)
+![Prediction Output](images/Predicting%20the%20scores.png)
 
 ## 🚀 Features
 
